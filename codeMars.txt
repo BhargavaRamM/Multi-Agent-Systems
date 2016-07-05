@@ -1,0 +1,52 @@
+while[ any? patches in-radius 2 with [pcolor = brown]] [
+      ; lt (random 180) - 90
+      ; fd 1
+       ;if-else(carrying?) [
+       ;  pd
+        ;head-to-spaceship
+      ;] [
+      set heading (heading + (angle / 2) - (random angle))
+      fd 1
+      ;]
+      ]
+
+  while [ any? patches in-radius 2 with [pcolor = green]] [
+   bk 1
+   ;
+   ;set heading (heading + (angle / 2) - (random angle))
+   rt (random 180) - 90
+   fd 1
+   ]
+
+;let next-patch patch-ahead 1
+
+ while [any? patches in-radius 2 with [pcolor = yellow]] [
+    move-to one-of patches with [pcolor = yellow]
+     if (any? patches with [pcolor = yellow])[
+      ;set pcolor  brown
+      set rocks rocks - 1
+      if (rocks < 0 ) [
+        set pcolor  brown
+        stop
+        ]
+      set carrying? true
+       if(carrying?) [
+        ; pen-down
+        head-to-spaceship
+      ]
+      ]
+
+]
+
+
+
+;ask one-of turtles [
+ pen-down
+   move-to one-of patches with [plabel = "destination"]
+   while [any?  patches in-radius 1 with [plabel = "destination"]] [
+       set carrying? false
+       set heading (heading + (angle / 2) - (random angle))
+       fd 1
+       follow-rules
+       ]
+ ;  ]
